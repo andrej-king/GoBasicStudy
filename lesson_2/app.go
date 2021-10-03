@@ -7,6 +7,24 @@ func main() {
 	//fmt.Println(fmt.Sprintf("%s %s", name, surname))
 }
 
+// struct instead class
+type testStruct struct {
+	a string
+	b string
+	c string
+}
+
+// func with return type "struct"
+func test3WithStruct() testStruct {
+	stringStruct := testStruct{
+		a: "Hello",
+		b: " all ",
+		c: "world",
+	}
+
+	return stringStruct
+}
+
 // basic func with return multi param types
 func test() (string, string) {
 	a := "hello"
