@@ -4,6 +4,7 @@ import "fmt"
 
 //const name string = "John"
 
+// const, func with return type, loops,  if, switch
 func main() {
 	//surname := "Doe"
 	//fmt.Println(fmt.Sprintf("%s %s", name, surname))

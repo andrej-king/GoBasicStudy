@@ -15,6 +15,7 @@ import (
 //extract GOPATH=D:\Go\go1.17.1\bin #gosetup
 //D:\Go\go1.17.1\bin\go.exe build -o D:\GoProjects\syntax\build\lesson_1\app_windows.exe D:\GoProjects\syntax\lesson_1\app.go #gosetup
 
+// var, types, concat, print, run simple HTTP server
 func main() {
 	//var a int8 = -1
 	//var b int16 = -1
