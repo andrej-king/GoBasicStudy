@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/mitchellh/mapstructure"
+	//"github.com/mitchellh/mapstructure"
 )
 
 // range, map
@@ -10,17 +10,17 @@ func main() {
 	//foreach() // foreach example
 	//exampleMaps()
 
-	//isKeyExists("a")
-	//isKeyExists("d")
+	isKeyExists("a")
+	isKeyExists("d")
 
 	// decoding map in structure
-	pointsMap := map[string]int{
+	/*	pointsMap := map[string]int{
 		"x": 1,
 		"y": 2,
-	}
+	}*/
 
 	// convert map in structure
-	mapstructure.Decode(pointsMap)
+	//mapstructure.Decode(pointsMap)
 }
 
 type Point struct {
