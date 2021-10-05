@@ -120,6 +120,7 @@ func isKeyExists(key string) {
 	}
 }
 
+// from golang-book.ru and golang-book.com
 func checkInMap() {
 	//elements := make(map[string]string)
 	//elements["H"] = "Hydrogen"
@@ -140,43 +141,43 @@ func checkInMap() {
 	//}
 
 	elements := map[string]map[string]string{
-		"H": map[string]string{
+		"H": {
 			"name":  "Hydrogen",
 			"state": "gas",
 		},
-		"He": map[string]string{
+		"He": {
 			"name":  "Helium",
 			"state": "gas",
 		},
-		"Li": map[string]string{
+		"Li": {
 			"name":  "Lithium",
 			"state": "solid",
 		},
-		"Be": map[string]string{
+		"Be": {
 			"name":  "Beryllium",
 			"state": "solid",
 		},
-		"B": map[string]string{
+		"B": {
 			"name":  "Boron",
 			"state": "solid",
 		},
-		"C": map[string]string{
+		"C": {
 			"name":  "Carbon",
 			"state": "solid",
 		},
-		"N": map[string]string{
+		"N": {
 			"name":  "Nitrogen",
 			"state": "gas",
 		},
-		"O": map[string]string{
+		"O": {
 			"name":  "Oxygen",
 			"state": "gas",
 		},
-		"F": map[string]string{
+		"F": {
 			"name":  "Fluorine",
 			"state": "gas",
 		},
-		"Ne": map[string]string{
+		"Ne": {
 			"name":  "Neon",
 			"state": "gas",
 		},
