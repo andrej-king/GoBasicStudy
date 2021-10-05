@@ -15,3 +15,8 @@ mkdir hello-world
 cd hello-world
 go mod init github.com/[username]/[project name]
 </pre>
+
+Download missing packages:
+<pre>
+go mod tidy
+</pre>

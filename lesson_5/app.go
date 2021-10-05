@@ -12,9 +12,9 @@ func main() {
 
 	//isKeyExists("a")
 	//isKeyExists("d")
-	checkInMap() // other way check value in map
+	//checkInMap() // other way check value in map
 
-	//decodingMapToStructure() // decoding map in structure
+	decodingMapToStructure() // decoding map in structure
 
 	//foreachMap()
 }
