@@ -12,10 +12,11 @@ func main() {
 
 	//isKeyExists("a")
 	//isKeyExists("d")
+	//checkInMap() // other way check value in map
 
 	//decodingMapToStructure() // decoding map in structure
 
-	foreachMap()
+	//foreachMap()
 }
 
 type Point struct {
@@ -116,6 +117,26 @@ func isKeyExists(key string) {
 	} else {
 		fmt.Printf("key = %s does not exist in map\n", key) // key = d does not exist in map
 		fmt.Println(value)                                  // {0 0}
+	}
+}
+
+func checkInMap() {
+	elements := make(map[string]string)
+	elements["H"] = "Hydrogen"
+	elements["He"] = "Helium"
+	elements["Li"] = "Lithium"
+	elements["Be"] = "Beryllium"
+	elements["B"] = "Boron"
+	elements["C"] = "Carbon"
+	elements["N"] = "Nitrogen"
+	elements["O"] = "Oxygen"
+	elements["F"] = "Fluorine"
+	elements["Ne"] = "Neon"
+
+	//fmt.Println(elements["Li"])
+
+	if name, ok := elements["Un"]; ok {
+		fmt.Println(name, ok)
 	}
 }
 
