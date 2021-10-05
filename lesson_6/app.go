@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 // interfaces
 func main() {
 	//var a someInterface
@@ -11,9 +13,16 @@ func main() {
 	//a = os
 	//fmt.Println(a.sum()) // 7
 	//
-	//var i someInterface = otherStructure{5, 10}
+	var i someInterface = otherStructure{5, 10}
 	//fmt.Println(i.sum()) // 15
 
+	fmt.Printf("%v, %T\n", i, i) // {5 10}, main.otherStructure
+
+	var os1 *someStructure
+	var emptyInterface someInterface
+	fmt.Printf("%v, %T\n", emptyInterface, emptyInterface) // <nil>, <nil>
+	emptyInterface = os1
+	fmt.Printf("%v, %T\n", emptyInterface, emptyInterface) // <nil>, *main.someStructure
 }
 
 type someInterface interface {
