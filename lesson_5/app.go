@@ -13,26 +13,38 @@ func main() {
 	//isKeyExists("a")
 	//isKeyExists("d")
 
-	// decoding map in structure
-	pointsMap := map[string]int{
-		"x": 1,
-		"y": 2,
-	}
-
-	p5 := Point{}
-
-	// convert map in structure
-	mapstructure.Decode(pointsMap, &p5)
-	fmt.Println(p5)
+	decodingMapToStructure() // decoding map in structure
 }
 
 type Point struct {
-	X, Y int
+	X int `mapstructure:"xx"` // special key name
+	Y int
 }
 
 // Point method
 func (p Point) method() {
 	fmt.Println(p.X, p.Y)
+}
+
+func decodingMapToStructure() {
+	pointsMap := map[string]int{
+		"x": 1,
+		"y": 2,
+	}
+
+	pointsMap2 := map[string]int{
+		"xx": 123,
+		"y":  456,
+	}
+
+	p1 := Point{}
+	p2 := Point{}
+
+	// convert map in structure
+	mapstructure.Decode(pointsMap, &p1)
+	mapstructure.Decode(pointsMap2, &p2)
+	fmt.Println(p1) // {0 2}
+	fmt.Println(p2) // {123 456}
 }
 
 // practice with map
