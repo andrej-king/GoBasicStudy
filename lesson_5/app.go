@@ -2,25 +2,28 @@ package main
 
 import (
 	"fmt"
-	//"github.com/mitchellh/mapstructure"
+	"github.com/mitchellh/mapstructure"
 )
 
-// range, map
+// range, map, convert map in structure
 func main() {
 	//foreach() // foreach example
 	//exampleMaps()
 
-	isKeyExists("a")
-	isKeyExists("d")
+	//isKeyExists("a")
+	//isKeyExists("d")
 
 	// decoding map in structure
-	/*	pointsMap := map[string]int{
+	pointsMap := map[string]int{
 		"x": 1,
 		"y": 2,
-	}*/
+	}
+
+	p5 := Point{}
 
 	// convert map in structure
-	//mapstructure.Decode(pointsMap)
+	mapstructure.Decode(pointsMap, &p5)
+	fmt.Println(p5)
 }
 
 type Point struct {
