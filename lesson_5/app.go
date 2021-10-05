@@ -13,7 +13,9 @@ func main() {
 	//isKeyExists("a")
 	//isKeyExists("d")
 
-	decodingMapToStructure() // decoding map in structure
+	//decodingMapToStructure() // decoding map in structure
+
+	foreachMap()
 }
 
 type Point struct {
@@ -24,6 +26,18 @@ type Point struct {
 // Point method
 func (p Point) method() {
 	fmt.Println(p.X, p.Y)
+}
+
+// map iterator
+func foreachMap() {
+	pointsMap := map[string]int{
+		"x": 123,
+		"y": 456,
+	}
+
+	for k, v := range pointsMap {
+		fmt.Println(k, "-", v)
+	}
 }
 
 func decodingMapToStructure() {
