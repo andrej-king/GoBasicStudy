@@ -16,7 +16,7 @@ func main() {
 
 	decodingMapToStructure() // decoding map in structure
 
-	//foreachMap()
+	foreachMap()
 }
 
 type Point struct {

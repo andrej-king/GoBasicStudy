@@ -9,6 +9,7 @@ func main() {
 	//arrays()
 	//slices()
 	//nils()
+	fmt.Println("test")
 }
 
 // nil - analog NULL

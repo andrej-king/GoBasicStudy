@@ -14,7 +14,7 @@ func main() {
 	//fmt.Println(a.sum()) // 7
 	//
 	var i someInterface = otherStructure{5, 10}
-	//fmt.Println(i.sum()) // 15
+	fmt.Println(i.sum()) // 15
 
 	fmt.Printf("%v, %T\n", i, i) // {5 10}, main.otherStructure
 

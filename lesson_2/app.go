@@ -13,6 +13,7 @@ func main() {
 	defer fmt.Println("Delayed operation 1")
 	defer fmt.Println("Delayed operation 2")
 	defer fmt.Println("Delayed operation 3")
+	defer fmt.Println("Delayed operation 4")
 
 	//fmt.Println(forLoop(10))
 	conditionsTest()

@@ -24,7 +24,7 @@ func main() {
 	p1 := Point{5, 5}
 	p1 = p1.moveOriginalPoint(1, 1)
 	fmt.Println(p1) // {6 6}
-
+	fmt.Println("test")
 }
 
 type Point struct {

@@ -52,6 +52,7 @@ func main() {
 	)
 	c := fmt.Sprintf("Hello %s. You are %d years old.", name6, age) // fmt.Sprintf concat
 	fmt.Println(c)
+	fmt.Println(name5)
 
 	// run simple web server
 	runServer()
