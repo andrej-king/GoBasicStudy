@@ -10,16 +10,11 @@ Then write the <b>go modules init</b> command in this folder to initialize the G
 Modules are used for dependencies.
 </p>
 
-<pre>
-mkdir hello-world
-cd hello-world
-go mod init github.com/[username]/[project name]
-</pre>
+`mkdir hello-world` \
+`cd hello-world` \
+`go mod init github.com/[username]/[project name]`
 
-Download missing packages:
-<pre>
-go mod tidy
-</pre>
+`go mod tidy` Download missing packages
 
 ### Envs
 `GOOS=linux;GOARCH=amd64` env for linux\
@@ -44,3 +39,6 @@ Add `t.Parallel()` in each test, to run tests in parallel
 ### Multithreading
 `go` Before calling the method, will run it on a new thread <font color="red">(If the main thread has finished executing, all other threads will not be executed.)</font>
 
+### Books for more information
+[golang-book.com](https://golang-book.com) original (eng) \
+[golang-book.ru](https://golang-book.ru) translated (rus)
