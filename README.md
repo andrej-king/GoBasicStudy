@@ -20,3 +20,23 @@ Download missing packages:
 <pre>
 go mod tidy
 </pre>
+
+### Envs
+`GOOS=linux;GOARCH=amd64` env for linux\
+`GOOS=windows;GOARCH=amd64` env for windows\
+`GOOS=darwin;GOARCH=amd64` env for macos
+
+### Build
+`extract GOROOT=D:\Go\go1.17.1 #gosetup`\
+`extract GOPATH=D:\Go\go1.17.1\bin #gosetup`\
+`D:\Go\go1.17.1\bin\go.exe build -o D:\GoProjects\syntax\build\lesson_1\app_windows.exe D:\GoProjects\syntax\lesson_1\app.go #gosetup`
+
+### Tests
+`cd` In folder with tests and write in terminal: \
+`go test -v` Display tests result \
+`go test -json` Display tests result in JSON format \
+`go test -v -run /simple` Run only test with name "simple" \
+`go test -v -run TestMultiple/simple` Run only method "TestMultiple with test name "simple" and all nested tests \
+`go test -v -run /simple/1` Running all nested methods with this name
+
+Add `t.Parallel()` in each test, to run tests in parallel
