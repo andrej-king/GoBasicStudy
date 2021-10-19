@@ -40,3 +40,7 @@ go mod tidy
 `go test -v -run /simple/1` Running all nested methods with this name
 
 Add `t.Parallel()` in each test, to run tests in parallel
+
+### Multithreading
+`go` Before calling the method, will run it on a new thread <font color="red">(If the main thread has finished executing, all other threads will not be executed.)</font>
+
