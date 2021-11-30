@@ -8,7 +8,18 @@ import (
 // Multithreading. Goroutines and channels
 func main() {
 	//testGoroutines()
-	testGoroutines2()
+	//testGoroutines2()
+	data := make(chan int)
+	exit := make(chan int)
+
+	// anonymous function will auto call.
+	go func() {
+		for i := 0; i < 10; i++ {
+			fmt.Println(<-data) // read data from channel
+		}
+		exit <- 0 // write data in channel
+	}()
+	selectOne(data, exit)
 }
 
 func sayText(word string) {
@@ -42,5 +53,23 @@ func testGoroutines2() {
 	//resultFromChannel := <-ch // get from channel
 	for i := range ch { // iterate in channel
 		fmt.Println(i)
+	}
+}
+
+// selectOne allow read multiple channels
+func selectOne(data, exit chan int) {
+	x := 0
+	for {
+		select {
+		case data <- x: // if read data from channel
+			x += 1
+		case <-exit: // if write data in channel
+			fmt.Println("exit")
+			return
+		default:
+			fmt.Println("Waiting...")
+			time.Sleep(50 * time.Millisecond)
+			//return
+		}
 	}
 }
