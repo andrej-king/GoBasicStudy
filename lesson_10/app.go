@@ -18,7 +18,9 @@ func (c *Counter) Inc(key string) {
 }
 
 func (c *Counter) Value(key string) int {
-	return c.c[key]
+	c.mu.Lock()         // lock to use.
+	defer c.mu.Unlock() // unlock to use (will run after critical section).
+	return c.c[key]     // critical section (in one time can use only one goroutine.
 }
 
 // Multithreading. Synchronization primitives
