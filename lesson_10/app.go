@@ -61,7 +61,6 @@ func (c *Counter2) CountMeAgain() map[string]int {
 
 // waitGroupSync sync.WaitGroup allow waiting end all goroutines in one moment (together).
 func waitGroupSync() {
-
 	var wg sync.WaitGroup
 
 	//wg.Add(1) // will be panic
@@ -84,9 +83,40 @@ func waitGroupSync() {
 	fmt.Println("all done")
 }
 
+// atomicForThreadSafe atomic counter.
+func atomicForThreadSafe() {
+	var wg sync.WaitGroup
+	var counter uint64
+	var mu sync.Mutex
+
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+
+		go func() {
+			defer wg.Done()
+
+			for j := 0; j < 1000; j++ {
+				//counter++ // lost part numbers. Not thread safe.
+
+				// Always result 10000.
+				mu.Lock()
+				counter++
+				mu.Unlock()
+
+				//atomic.AddUint64(&counter, 1) // Always result 10000. Thread safe
+			}
+		}()
+	}
+
+	wg.Wait()
+	fmt.Printf("all done. couner: %d\n", counter)
+}
+
 // Multithreading. Synchronization primitives
 func main() {
 	//simpleMutexPractice()
 
-	waitGroupSync()
+	//waitGroupSync()
+
+	atomicForThreadSafe()
 }
