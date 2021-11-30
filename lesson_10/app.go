@@ -59,7 +59,34 @@ func (c *Counter2) CountMeAgain() map[string]int {
 	return c.c
 }
 
+// waitGroupSync sync.WaitGroup allow waiting end all goroutines in one moment (together).
+func waitGroupSync() {
+
+	var wg sync.WaitGroup
+
+	//wg.Add(1) // will be panic
+	for i := 0; i < 10; i++ {
+		// will be panic
+		/*if (i == 1) {
+			wg.Add(1)
+		}*/
+
+		wg.Add(1) // can't be less than 0.
+		go func(i int) {
+			defer wg.Done() // remove from wg.Add -1
+
+			fmt.Printf("%d goroutine working...\n", i)
+			time.Sleep(1 * time.Second)
+		}(i)
+	}
+
+	wg.Wait()
+	fmt.Println("all done")
+}
+
 // Multithreading. Synchronization primitives
 func main() {
-	simpleMutexPractice()
+	//simpleMutexPractice()
+
+	waitGroupSync()
 }

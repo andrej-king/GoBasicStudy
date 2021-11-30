@@ -39,7 +39,8 @@ Add `t.Parallel()` in each test, to run tests in parallel
 ### Multithreading
 `go` Before calling the method, will run it on a new thread <font color="red">(If the main thread has finished executing, all other threads will not be executed.)</font> \
 `channels` use for multithreading \
-`select` Allow read data from multiple channels.
+`select` Allow read data from multiple channels. \
+`sync.WaitGroup` Allow waiting end all goroutines in one moment (together).
 
 ### Books for more information
 [golang-book.com](https://golang-book.com) original (eng) \
