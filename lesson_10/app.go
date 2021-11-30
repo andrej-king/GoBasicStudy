@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"sync"
+	"sync/atomic"
 	"time"
 )
 
@@ -103,7 +104,7 @@ func atomicForThreadSafe() {
 				counter++
 				mu.Unlock()
 
-				//atomic.AddUint64(&counter, 1) // Always result 10000. Thread safe
+				atomic.AddUint64(&counter, 1) // Always result 10000. Thread safe
 			}
 		}()
 	}
