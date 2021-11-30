@@ -41,7 +41,8 @@ Add `t.Parallel()` in each test, to run tests in parallel
 `channels` use for multithreading \
 `select` Allow read data from multiple channels. \
 `sync.WaitGroup` Allow waiting end all goroutines in one moment (together). \
-`sync\atomic` Thread safe counter.
+`sync\atomic` Thread safe counter. \
+`sync.Once` will run only one time
 
 ### Books for more information
 [golang-book.com](https://golang-book.com) original (eng) \

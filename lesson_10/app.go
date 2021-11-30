@@ -113,11 +113,35 @@ func atomicForThreadSafe() {
 	fmt.Printf("all done. couner: %d\n", counter)
 }
 
+// onceRunning sync.Once will run only one time
+func onceRunning() {
+	var once sync.Once
+	done := make(chan bool)
+
+	for i := 0; i < 10; i++ {
+		go func(i int) {
+			once.Do(func() {
+				fmt.Println("Run only one time.")
+			})
+			fmt.Printf("Run %d times\n", i)
+
+			done <- true
+		}(i)
+	}
+
+	for i := 0; i < 10; i++ {
+		<-done
+	}
+
+}
+
 // Multithreading. Synchronization primitives
 func main() {
 	//simpleMutexPractice()
 
 	//waitGroupSync()
 
-	atomicForThreadSafe()
+	//atomicForThreadSafe()
+
+	onceRunning()
 }
