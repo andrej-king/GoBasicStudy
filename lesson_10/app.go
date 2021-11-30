@@ -88,7 +88,7 @@ func waitGroupSync() {
 func atomicForThreadSafe() {
 	var wg sync.WaitGroup
 	var counter uint64
-	var mu sync.Mutex
+	//var mu sync.Mutex
 
 	for i := 0; i < 10; i++ {
 		wg.Add(1)
@@ -100,9 +100,9 @@ func atomicForThreadSafe() {
 				//counter++ // lost part numbers. Not thread safe.
 
 				// Always result 10000.
-				mu.Lock()
-				counter++
-				mu.Unlock()
+				//mu.Lock()
+				//counter++
+				//mu.Unlock()
 
 				atomic.AddUint64(&counter, 1) // Always result 10000. Thread safe
 			}
