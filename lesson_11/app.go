@@ -58,5 +58,6 @@ func main() {
 	//callOwnPanic()
 
 	//divide(4, 2) // ok
-	divide(4, 0) // call panic
+	divide(4, 0)                    // call panic "2021/12/01 21:47:09 panic happened runtime error: integer divide by zero"
+	fmt.Println("Code after panic") // get result "Code after panic"
 }
