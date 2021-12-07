@@ -68,13 +68,16 @@ func divideWithCustomError(a, b int) {
 			switch err.(type) {
 			case error:
 				if errors.As(err.(error), &appErr) {
-					fmt.Println("custom panic!", err)
+					fmt.Println("This is App Error handle panic:", err)
 				} else {
-					fmt.Println("basic panic")
+					fmt.Println("This is Other Error handle panic:", err)
 				}
 			default:
-				panic("some panic!")
+				// golang panic
+				fmt.Println("This is default go panic:", err)
+				//panic("Some panic!")
 			}
+			log.Println("Panic happened:", err)
 		}
 	}()
 
@@ -83,10 +86,17 @@ func divideWithCustomError(a, b int) {
 
 func div(a, b int) int {
 	if b == 0 {
-		panic(&AppError{
+		// first panic type
+		//panic(fmt.Errorf("Some error")) // This is Other Error handle panic
+
+		// second panic type
+		panic(&AppError{ // This is App Error handle panic
 			Message: "This is divide by zero custom error!",
 			Err:     nil,
 		})
+
+		// third panic type
+		//panic("aaa") // This is default go panic
 	}
 	return a / b
 }
