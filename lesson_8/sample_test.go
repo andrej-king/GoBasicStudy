@@ -221,5 +221,35 @@ func TestAdd(t *testing.T) {
 				t.Errorf("failed")
 			}
 		})
+
+		// clean up after test
+		t.Cleanup(func() {
+			fmt.Println("TEARDOWN ON CLEANUP")
+		})
 	})
+}
+
+// go test -v -run TestExampleCleanUp  | go test -v -run FIRST
+// TestExampleCleanUp add clean up, will run after all tests (even if panic)
+func TestExampleCleanUp(t *testing.T) {
+	fmt.Println("SETUP")
+
+	// clean up after test
+	t.Cleanup(func() {
+		fmt.Println("TEAR DOWN ON CLEANUP")
+	})
+
+	t.Run("FIRST", func(t *testing.T) {
+		fmt.Println("ok")
+	})
+
+	t.Run("SECOND", func(t *testing.T) {
+		fmt.Println("ok")
+	})
+
+	t.Run("THIRD", func(t *testing.T) {
+		panic("some panic in test")
+	})
+
+	fmt.Println("TEARDOWN AT END")
 }
