@@ -4,16 +4,19 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/tidwall/gjson"
+	"github.com/tidwall/sjson"
 	"strings"
 )
 
 // work with json
 // libs for work with json:
 // https://github.com/tidwall/gjson
+// https://github.com/tidwall/sjson
 func main() {
 	//jsonSerialize()
 	//jsonDeserialize()
-	gjsonLibPractice()
+	//gjsonLibPractice()
+	sjsonLibPractice()
 }
 
 type User struct {
@@ -161,4 +164,29 @@ func gjsonLibPractice() {
 		panic("Error parsing to map")
 	}
 	fmt.Println(result) // json converted to map
+}
+
+// https://github.com/tidwall/sjson
+// go get -u github.com/tidwall/sjson
+func sjsonLibPractice() {
+	jsonString := `{
+					  "name": {"first":  "John", "last":  "Doe"},
+					  "age": 37,
+					  "children": ["Sara", "Alex", "Jack"],
+					  "fav.movie": "Dear Hunter",
+					  "friends": [
+						{"first": "Dale", "last":  "Murphy", "age": 44, "nets":  ["ig", "fb", "tw"]},
+						{"first": "Roger", "last":  "Craig", "age": 68, "nets":  ["fb", "tw"]},
+						{"first": "Jane", "last":  "Murphy", "age": 47, "nets":  ["ig", "tw"]}
+					  ]
+					}`
+
+	updateJsonValue, _ := sjson.Set(jsonString, "name.first", "Jack")
+	fmt.Println("sjson updateJsonValue:", updateJsonValue) //  "name": {"first":  "Jack", "last":  "Doe"}...
+
+	addJsonValue, _ := sjson.Set(jsonString, "children.4", "Jack")
+	fmt.Println("sjson addJsonValue:", addJsonValue) //  ..."children": ["Sara","Alex","Jack",null,"Jack"]...
+
+	correctAddJsonValue, _ := sjson.Set(jsonString, "children.-1", "John")
+	fmt.Println("sjson addJsonValue:", correctAddJsonValue) //  ..."children": ["Sara", "Alex", "Jack","John"]...
 }
