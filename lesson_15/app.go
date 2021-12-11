@@ -192,4 +192,11 @@ func sjsonLibPractice() {
 
 	addJsonElement, _ := sjson.Set(jsonString, "newObj", map[string]interface{}{"hello": "world"})
 	fmt.Println("sjson addJsonElement:", addJsonElement) //  ..."newObj":{"hello":"world"}}...
+
+	emptyString := ""
+	addJsonElement2, _ := sjson.Set(emptyString, "newObj", map[string]interface{}{"hello": "world"})
+	fmt.Println("sjson addJsonElement2:", addJsonElement2) //  "newObj":{"hello":"world"}}
+
+	removeElement, _ := sjson.Delete(jsonString, "friends")
+	fmt.Println("sjson removeElement:", removeElement) // json with deleted element
 }
