@@ -199,4 +199,7 @@ func sjsonLibPractice() {
 
 	removeElement, _ := sjson.Delete(jsonString, "friends")
 	fmt.Println("sjson removeElement:", removeElement) // json with deleted element
+
+	removeElement2, _ := sjson.Delete(jsonString, "children.1")
+	fmt.Println("sjson removeElement:", removeElement2) // json with deleted element
 }
