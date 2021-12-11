@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/tidwall/gjson"
 )
 
 // work with json
@@ -10,7 +11,8 @@ import (
 // https://github.com/tidwall/gjson
 func main() {
 	//jsonSerialize()
-	jsonDeserialize()
+	//jsonDeserialize()
+	gjsonLibPractice()
 }
 
 type User struct {
@@ -80,4 +82,41 @@ func jsonDeserialize() {
 		panic(err)
 	}
 	fmt.Println(data2.Books[0].Name) // BN1
+}
+
+// https://github.com/tidwall/gjson
+// go get -u github.com/tidwall/gjson
+func gjsonLibPractice() {
+	jsonString := `{"name":"John","age":40,"isBlocked":true, "name2": {"first": "John", "last": "Doe"}, "books":[{"name":"BN1","year":1990},{"name":"BN2","year":1991}]}`
+	value := gjson.Get(jsonString, "name2.first")
+	fmt.Println("gjson value: ", value.String()) // gjson value:  John
+
+	jsonString2 := `{
+					  "name": {"first":  "John", "last":  "Doe"},
+					  "age": 37,
+					  "children": ["Sara", "Alex", "Jack"],
+					  "fav.movie": "Dear Hunter",
+					  "friends": [
+						{"first": "Dale", "last":  "Murphy", "age": 44, "nets":  ["ig", "fb", "tw"]},
+						{"first": "Roger", "last":  "Craig", "age": 68, "nets":  ["fb", "tw"]},
+						{"first": "Jane", "last":  "Murphy", "age": 47, "nets":  ["ig", "tw"]}
+					  ]
+					}`
+	valueArray := gjson.Get(jsonString2, "children")
+	fmt.Println("gjson arrayValue:", valueArray) // gjson arrayValue: ["Sara", "Alex", "Jack"]
+
+	valueWithDot := gjson.Get(jsonString2, "fav\\.movie")
+	fmt.Println("gjson valueWithDot:", valueWithDot) // gjson valueWithDot: Dear Hunter
+
+	valueFromArray := gjson.Get(jsonString2, "children.1")
+	fmt.Println("gjson valueFromArray:", valueFromArray) // gjson valueFromArray: Alex
+
+	arrayLength := gjson.Get(jsonString2, "children.#")
+	fmt.Println("gjson arrayLength:", arrayLength) // gjson arrayLength: 3
+
+	valueFromArray2 := gjson.Get(jsonString2, "child*.2")
+	fmt.Println("gjson valueFromArray2:", valueFromArray2) // gjson valueFromArray2: Jack
+
+	valueFromArray3 := gjson.Get(jsonString2, "friends.1.age")
+	fmt.Println("gjson valueFromArray3:", valueFromArray3) // gjson valueFromArray3: 68
 }
