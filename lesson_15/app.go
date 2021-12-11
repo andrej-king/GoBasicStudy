@@ -189,4 +189,7 @@ func sjsonLibPractice() {
 
 	correctAddJsonValue, _ := sjson.Set(jsonString, "children.-1", "John")
 	fmt.Println("sjson addJsonValue:", correctAddJsonValue) //  ..."children": ["Sara", "Alex", "Jack","John"]...
+
+	addJsonElement, _ := sjson.Set(jsonString, "newObj", map[string]interface{}{"hello": "world"})
+	fmt.Println("sjson addJsonElement:", addJsonElement) //  ..."newObj":{"hello":"world"}}...
 }
