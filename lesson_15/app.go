@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/tidwall/gjson"
+	"strings"
 )
 
 // work with json
@@ -89,7 +90,7 @@ func jsonDeserialize() {
 func gjsonLibPractice() {
 	jsonString := `{"name":"John","age":40,"isBlocked":true, "name2": {"first": "John", "last": "Doe"}, "books":[{"name":"BN1","year":1990},{"name":"BN2","year":1991}]}`
 	value := gjson.Get(jsonString, "name2.first")
-	fmt.Println("gjson value: ", value.String()) // gjson value:  John
+	fmt.Println("gjson value: ", value.String()) // John
 
 	jsonString2 := `{
 					  "name": {"first":  "John", "last":  "Doe"},
@@ -103,20 +104,61 @@ func gjsonLibPractice() {
 					  ]
 					}`
 	valueArray := gjson.Get(jsonString2, "children")
-	fmt.Println("gjson arrayValue:", valueArray) // gjson arrayValue: ["Sara", "Alex", "Jack"]
+	fmt.Println("gjson arrayValue:", valueArray) // ["Sara", "Alex", "Jack"]
 
 	valueWithDot := gjson.Get(jsonString2, "fav\\.movie")
-	fmt.Println("gjson valueWithDot:", valueWithDot) // gjson valueWithDot: Dear Hunter
+	fmt.Println("gjson valueWithDot:", valueWithDot) // Dear Hunter
 
 	valueFromArray := gjson.Get(jsonString2, "children.1")
-	fmt.Println("gjson valueFromArray:", valueFromArray) // gjson valueFromArray: Alex
+	fmt.Println("gjson valueFromArray:", valueFromArray) // Alex
 
 	arrayLength := gjson.Get(jsonString2, "children.#")
-	fmt.Println("gjson arrayLength:", arrayLength) // gjson arrayLength: 3
+	fmt.Println("gjson arrayLength:", arrayLength) // 3
 
 	valueFromArray2 := gjson.Get(jsonString2, "child*.2")
-	fmt.Println("gjson valueFromArray2:", valueFromArray2) // gjson valueFromArray2: Jack
+	fmt.Println("gjson valueFromArray2:", valueFromArray2) // Jack
 
 	valueFromArray3 := gjson.Get(jsonString2, "friends.1.age")
-	fmt.Println("gjson valueFromArray3:", valueFromArray3) // gjson valueFromArray3: 68
+	fmt.Println("gjson valueFromArray3:", valueFromArray3) // 68
+
+	valueFromArray4 := gjson.Get(jsonString2, `friends.#(last=="Murphy").first`)
+	fmt.Println("gjson valueFromArray4:", valueFromArray4) // Dale
+
+	valueFromArray5 := gjson.Get(jsonString2, `friends.#(last=="Murphy")#.first`)
+	fmt.Println("gjson valueFromArray5:", valueFromArray5) // ["Dale","Jane"]
+
+	valueFromArray6 := gjson.Get(jsonString2, `friends.#(age>=40)#.first`)
+	fmt.Println("gjson valueFromArray6:", valueFromArray6) // ["Dale","Roger","Jane"]
+
+	// custom modifier
+	gjson.AddModifier("case", func(json, arg string) string {
+		if arg == "upper" {
+			return strings.ToUpper(json)
+		} else if arg == "lower" {
+			return strings.ToLower(json)
+		}
+		return json
+	})
+
+	valueFromArrayWithUpperCase := gjson.Get(jsonString2, `friends.#(age>=40)#.first|@case:upper`)
+	fmt.Println("gjson valueFromArrayWithUpperCase:", valueFromArrayWithUpperCase) // ["DALE","ROGER","JANE"]
+
+	fmt.Println("gjson parse:", gjson.Parse(jsonString2).Get("name")) // {"first":  "John", "last":  "Doe"}
+
+	//invalidJsonString := `{"name": abc}`
+	if !gjson.Valid(jsonString2) {
+		panic("JSON IS NOT VALID")
+	}
+
+	valueFromArray7 := gjson.Get(jsonString2, `friends.#(age>=40)#.first|@case:upper`)
+	for _, firstName := range valueFromArray7.Array() {
+		fmt.Println("firstName:", firstName) // DALE ROGER JANE
+	}
+
+	// parsing json to map
+	result, ok := gjson.Parse(jsonString2).Value().(map[string]interface{})
+	if !ok {
+		panic("Error parsing to map")
+	}
+	fmt.Println(result) // json converted to map
 }
